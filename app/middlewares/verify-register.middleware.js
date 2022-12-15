@@ -35,9 +35,21 @@ const checkDuplicateUsernameOrEmail = async (req, res, next) => {
             }),
         ])
 
+        const [userPhoneNumber] = await Promise.all([
+            User.findOne({
+                phoneNumber: req.body.phoneNumber,
+            }),
+        ])
+
         if (userByEmail) {
             return next(
                 new ApiError(422, 'Địa chỉ email đã được sử dụng!')
+            )
+        }
+
+        if (userPhoneNumber) {
+            return next(
+                new ApiError(422, 'Số điện thoại đã được sử dụng!')
             )
         }
 
