@@ -27,8 +27,11 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    modelInterest : {
+    modelInterest: {
         type: String,
+    },
+    isCash: {
+        type: Boolean
     },
     refreshToken: [String],
 })
