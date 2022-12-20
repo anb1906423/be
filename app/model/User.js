@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     roles: {
         type: Number,
@@ -26,6 +26,9 @@ const userSchema = new Schema({
     created: {
         type: Date,
         default: Date.now()
+    },
+    modelInterest : {
+        type: String,
     },
     refreshToken: [String],
 })
