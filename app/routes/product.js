@@ -7,5 +7,6 @@ router.route('/delete', [verifyJWT]).post(productController.deleteProducts);
 router.route('/').get(productController.getAllProducts);
 
 router.route('/:id').get(productController.getProduct)
+router.route('/:id', [verifyJWT]).put(productController.updateProduct)
 
 module.exports = router; 
