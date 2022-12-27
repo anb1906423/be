@@ -1,6 +1,7 @@
 const PriceTable = require('../model/PriceTable')
 const { BadRequestError } = require('../api-error')
 const handlePromise = require('../helpers/promise.helper')
+const mongoose = require('mongoose')
 
 const handleNewPriceTable = async (req, res) => {
     const { nameCar, srcCar, version, price } = req.body
@@ -54,4 +55,34 @@ const deletePriceTable = async (req, res) => {
     res.json(result);
 }
 
-module.exports = { handleNewPriceTable, getAllPriceTable, deletePriceTable }
+const updatePriceTable = async (req, res, next) => {
+    // if (Object.keys(req.body).length === 0) {
+    //     return next(new BadRequestError(400,
+    //         'Dữ liệu không được để trống!'))
+    // }
+
+    const { id } = req.params
+    const condition = {
+        _id: id && mongoose.isValidObjectId(id) ? id : null,
+    }
+
+    const [error, document] = await handlePromise(
+        PriceTable.findOneAndUpdate(condition, req.body, {
+            new: true,
+        })
+    )
+
+    if (error) {
+        return next(new BadRequestError(500,
+            `Đã xảy ra lỗi khi cập nhật thông tin bảng giá id=${req.params.id}`))
+    }
+
+    if (!document) {
+        return next(new NotFoundError(404,
+            'Không tìm thấy bảng giá'))
+    }
+
+    return res.send({ message: 'Cập nhật thông tin bảng giá thành công!', })
+}
+
+module.exports = { handleNewPriceTable, getAllPriceTable, deletePriceTable, updatePriceTable }
