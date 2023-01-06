@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const handleRegister = async (req, res) => {
     var roles = 0
     User.count({}, function(error, countUser) {
-        if (countUser == 1) {
+        if (countUser == 0) {
             roles = 1;
         }
     });
@@ -26,13 +26,13 @@ const handleRegister = async (req, res) => {
     }
 
     try {
-        const hashedPwd = await bcrypt.hash(pwd, 8)
+        // const hashedPwd = await bcrypt.hash(pwd, 8)
 
         const result = await User.create({
             "fullName": fullName,
             "phoneNumber": phoneNumber,
             "email": email,
-            "password": hashedPwd,
+            "password": pwd,
             "modelInterest": model,
             "isCash": isCash,
             "roles": roles
