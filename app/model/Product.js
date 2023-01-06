@@ -11,7 +11,7 @@ const productSchema = new Schema({
         required: false
     },
     src: {
-        type: String,
+        type: [String],
         required: true
     },
     href: {
@@ -84,7 +84,6 @@ const productSchema = new Schema({
     },
     version: {
         type: [String],
-        // default: "Tiêu chuẩn"
     }
 })
 
