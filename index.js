@@ -41,7 +41,7 @@ app.use('/logout', require('./app/routes/logout'))
 app.use('/admin/add-product', require('./app/routes/newProduct'))
 app.use('/admin', require('./app/routes/priceTable'))
 app.use('/admin', require('./app/routes/product'))
-app.use('/test-drive', require('./app/routes/testDrive'))
+// app.use('/test-drive', require('./app/routes/testDrive'))
 app.use('/', require('./app/routes/user'))
 
 // app.use(verifyJWT);
