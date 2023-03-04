@@ -43,6 +43,8 @@ app.use('/admin', require('./app/routes/priceTable'))
 app.use('/admin', require('./app/routes/product'))
 // app.use('/test-drive', require('./app/routes/testDrive'))
 app.use('/', require('./app/routes/user'))
+app.use('/intro', require('./app/routes/intro'))
+app.use('/contact', require('./app/routes/contact'))
 
 // app.use(verifyJWT);
 
